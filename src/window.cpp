@@ -29,7 +29,6 @@ Window::~Window(){
 
 void Window::update(){
     //--- Poll the events ---//    
-
     SDL_Event event;
 
     while(SDL_PollEvent(&event)){
@@ -39,15 +38,12 @@ void Window::update(){
     }
 }
 
-void Window::clear(){
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(gRenderer);
-
-    SDL_RenderPresent(gRenderer);
-}
-
 bool Window::isOpen(){
     return (running)? true : false;
+}
+
+SDL_Window* Window::getWindow(){
+    return gWindow;
 }
 
 bool Window::init(){
@@ -58,12 +54,11 @@ bool Window::init(){
 
     IMG_Init(IMG_INIT_PNG);
 
-    return (initWindow() && initRenderer())? true : false;    
+    return (initWindow())? true : false;    
 }
 
 void Window::close(){
     SDL_DestroyWindow(gWindow);
-    SDL_DestroyRenderer(gRenderer);
 
     IMG_Quit();
     SDL_Quit();
@@ -81,21 +76,6 @@ bool Window::initWindow(){
 
     if(!gWindow){
         printf("Could not make a window! SDL_ERROR: %s\n", SDL_GetError());
-        return false;
-    }
-
-    return true;
-}
-
-bool Window::initRenderer(){
-    gRenderer = SDL_CreateRenderer(
-        gWindow,
-        -1,
-        0
-    );
-
-    if(!gRenderer){
-        printf("Could not create the renderer! SDL_ERROR: %s\n", SDL_GetError());
         return false;
     }
 

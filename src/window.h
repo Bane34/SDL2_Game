@@ -14,9 +14,9 @@ public:
     ~Window();
 
     void update();
-    void clear();
 
     bool isOpen();
+    SDL_Window* getWindow();
 
 private:
     /* Methods */
@@ -24,11 +24,9 @@ private:
     void close();
 
     bool initWindow();    
-    bool initRenderer();
 
     /* Variables */
     SDL_Window*   gWindow   = NULL;
-    SDL_Renderer* gRenderer = NULL;
 
     const char* name;
     unsigned int width, height;

@@ -1,12 +1,19 @@
 #include "window.h"
+#include "renderer.h"
 
 int main(int argc, char** argv){
-    Window window("SDL engine", 0, 0); // 0 and 0 for the default dimensions
+    Window window("SDL test", 0, 0);
+    Renderer renderer(window.getWindow());
+
+    SDL_Texture* texture1 = renderer.loadSprite("images/stickman.png");
 
     while(window.isOpen()){
         window.update();
-        window.clear();
+        renderer.clear();
+        renderer.drawSprite(texture1, 100, 100, 107, 240);
     }
+
+    renderer.destroyTexture(texture1);
 
     return 0;
 }
