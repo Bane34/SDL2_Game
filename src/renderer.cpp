@@ -16,6 +16,10 @@ void Renderer::clear(){
     SDL_RenderClear(gRenderer);
 }
 
+void Renderer::draw(){
+    SDL_RenderPresent(gRenderer);
+}
+
 SDL_Texture* Renderer::loadSprite(const char* file){
     SDL_Surface* temp = NULL;
     SDL_Texture* texture = NULL;
@@ -28,19 +32,22 @@ SDL_Texture* Renderer::loadSprite(const char* file){
     return texture;
 }
 
-void Renderer::drawSprite(SDL_Texture* texture, uint32_t xpos, uint32_t ypos, uint32_t w, uint32_t h){
-    SDL_Rect rect;
-    rect.x = xpos;
-    rect.y = ypos;
-    rect.w = w;
-    rect.h = h;
+void Renderer::drawSprite(Sprite sprite, uint32_t xpos, uint32_t ypos, uint32_t w, uint32_t h){
+    sprite.rect.x = xpos;
+    sprite.rect.y = ypos;
+    sprite.rect.w = w;
+    sprite.rect.h = h;
     
-    SDL_RenderCopy(gRenderer, texture, NULL, &rect);
+    SDL_RenderCopy(gRenderer, sprite.texture, NULL, &sprite.rect);
     SDL_RenderPresent(gRenderer);
 }
 
 void Renderer::destroyTexture(SDL_Texture* texture){
     SDL_DestroyTexture(texture);
+}
+
+SDL_Renderer* Renderer::getRenderer(){
+    return gRenderer;
 }
 
 bool Renderer::init(){

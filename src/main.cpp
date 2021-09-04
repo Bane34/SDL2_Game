@@ -1,19 +1,23 @@
 #include "window.h"
 #include "renderer.h"
+#include "sprite.h"
 
 int main(int argc, char** argv){
     Window window("SDL test", 0, 0);
     Renderer renderer(window.getWindow());
 
-    SDL_Texture* texture1 = renderer.loadSprite("images/stickman.png");
+    Sprite sprite1;
+    sprite1.texture = renderer.loadSprite("images/stickman.png");
 
     while(window.isOpen()){
         window.update();
         renderer.clear();
-        renderer.drawSprite(texture1, 100, 100, 107, 240);
+        renderer.drawSprite(sprite1, 100, 100, 107, 240);
+
+        renderer.draw();
     }
 
-    renderer.destroyTexture(texture1);
+    renderer.destroyTexture(sprite1.texture);
 
     return 0;
 }
