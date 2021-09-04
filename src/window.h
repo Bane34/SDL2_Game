@@ -13,20 +13,25 @@ public:
     Window(const char* name, unsigned const int w, unsigned const int h);
     ~Window();
 
+    void update();
+    void clear();
+
+    bool isOpen();
+
 private:
     /* Methods */
     bool init();
     void close();
 
     bool initWindow();    
-    bool render();
+    bool initRenderer();
 
     /* Variables */
     SDL_Window*   gWindow   = NULL;
     SDL_Renderer* gRenderer = NULL;
 
     const char* name;
-    int width, height;
+    unsigned int width, height;
     bool running;
 };
 

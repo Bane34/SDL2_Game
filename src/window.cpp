@@ -19,10 +19,35 @@ Window::Window(const char* name, unsigned const int w, unsigned const int h){
         printf("Could not init the window\n");
         return;
     }
+
+    running = true;
 }
 
 Window::~Window(){
     close();    
+}
+
+void Window::update(){
+    //--- Poll the events ---//    
+
+    SDL_Event event;
+
+    while(SDL_PollEvent(&event)){
+        if(event.type == SDL_QUIT) {
+            running = false;
+        }
+    }
+}
+
+void Window::clear(){
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+
+    SDL_RenderPresent(gRenderer);
+}
+
+bool Window::isOpen(){
+    return (running)? true : false;
 }
 
 bool Window::init(){
@@ -33,7 +58,7 @@ bool Window::init(){
 
     IMG_Init(IMG_INIT_PNG);
 
-    return (initWindow())? true : false;    
+    return (initWindow() && initRenderer())? true : false;    
 }
 
 void Window::close(){
@@ -45,7 +70,7 @@ void Window::close(){
 }
 
 bool Window::initWindow(){
-    this->gWindow = SDL_CreateWindow(
+    gWindow = SDL_CreateWindow(
         this->name,
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
@@ -59,45 +84,20 @@ bool Window::initWindow(){
         return false;
     }
 
-    return (render())? true : false;
+    return true;
 }
 
-bool Window::render(){
-    this->gRenderer = SDL_CreateRenderer(
-        this->gWindow,
+bool Window::initRenderer(){
+    gRenderer = SDL_CreateRenderer(
+        gWindow,
         -1,
         0
     );
 
-    SDL_Texture* texture = NULL;
-    SDL_Surface* temp = IMG_Load("images/stickman.png");
-    
-    texture = SDL_CreateTextureFromSurface(gRenderer, temp);
-    SDL_FreeSurface(temp);
-
-    SDL_Rect rect;
-    rect.x = 0;
-    rect.y = 250;
-    rect.w = 107;
-    rect.h = 240;
-
-    SDL_Event event;
-    running = true;
-    
-    while(running){
-        while(SDL_PollEvent(&event)){
-            if(event.type == SDL_QUIT)
-                running = false;
-        }
-
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-
-        SDL_RenderCopy(gRenderer, texture, NULL, &rect);
-        SDL_RenderPresent(gRenderer);
+    if(!gRenderer){
+        printf("Could not create the renderer! SDL_ERROR: %s\n", SDL_GetError());
+        return false;
     }
-
-    SDL_DestroyTexture(texture);
 
     return true;
 }
