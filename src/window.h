@@ -10,10 +10,10 @@
 
 class Window {
 public:
-    Window(const char* name, unsigned const int w, unsigned const int h);
+    Window(const char* name, uint32_t w, uint32_t h);
     ~Window();
 
-    void update();
+    void handleEvents(); 
 
     bool isOpen();
     SDL_Window* getWindow();
@@ -26,7 +26,7 @@ private:
     bool initWindow();    
 
     /* Variables */
-    SDL_Window*   gWindow   = NULL;
+    SDL_Window* gWindow = NULL;
 
     const char* name;
     unsigned int width, height;

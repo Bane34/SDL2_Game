@@ -1,11 +1,11 @@
 #include "window.h"
 
-// If the width or the height are 0
-// The window will use the default width and height
-// 480 and 640 respectively
-Window::Window(const char* name, unsigned const int w, unsigned const int h){ 
+Window::Window(const char* name, uint32_t w, uint32_t h){ 
     this->name = name;
-
+    
+    // If the width or the height are 0
+    // The window will use the default width and height
+    // 480 and 640 respectively
     if(w == 0 || h == 0){
         this->width = DEFAULT_WINDOW_WIDTH;         
         this->height = DEFAULT_WINDOW_HEIGHT;
@@ -27,7 +27,7 @@ Window::~Window(){
     close();    
 }
 
-void Window::update(){
+void Window::handleEvents(){
     //--- Poll the events ---//    
     SDL_Event event;
 

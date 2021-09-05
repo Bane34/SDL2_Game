@@ -10,7 +10,7 @@ int main(int argc, char** argv){
     sprite1.texture = renderer.loadSprite("images/stickman.png");
 
     while(window.isOpen()){
-        window.update();
+        window.handleEvents();
         renderer.clear();
         renderer.drawSprite(sprite1, 100, 100, 107, 240);
 
