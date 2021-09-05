@@ -2,7 +2,7 @@
 
 Window::Window(const char* name, uint32_t w, uint32_t h){ 
     this->name = name;
-    
+
     // If the width or the height are 0
     // The window will use the default width and height
     // 480 and 640 respectively

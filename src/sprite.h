@@ -6,7 +6,7 @@
 
 struct Sprite{
     SDL_Texture* texture = NULL;
-    SDL_Rect    rect;
+    SDL_Rect     rect;
 };
 
 #endif /* SPRITE_H */

@@ -11,8 +11,8 @@ Renderer::~Renderer(){
     close();
 }
 
-void Renderer::clear(){
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+void Renderer::clear(Color color = {0xFF, 0xFF, 0xFF, 0xFF}){
+    SDL_SetRenderDrawColor(gRenderer, color.r, color.g, color.b, color.a);
     SDL_RenderClear(gRenderer);
 }
 
