@@ -15,8 +15,8 @@ public:
     void clear(Color color);
     void draw();
     SDL_Texture* loadTexture(const char* file);
-    void drawEntity(Entity& entity);
-    //void updateEntityAnimatino(Entity& entity, int );
+    void drawEntity(Entity& entity, int escale);
+    void updateEntityAnimatinon(Entity* entity, int timeBetweenFrames, int animationFrames);
     void destroyEntity(Entity* entity);
 
     SDL_Renderer* getRenderer();

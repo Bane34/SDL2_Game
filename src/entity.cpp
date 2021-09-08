@@ -31,6 +31,11 @@ SDL_Rect Entity::getCurrentFrame(){
     return gCurrentFrame;
 }
 
+void Entity::updateCurrentFrame(int x, int y){
+    gCurrentFrame.x = x;
+    gCurrentFrame.y = y;
+}
+
 void Entity::update(){
     gCurrentFrame.x = 32 * int((SDL_GetTicks() / 1000) % 4);
 }

@@ -32,7 +32,7 @@ SDL_Texture* Renderer::loadTexture(const char* file){
     return texture;
 }
 
-void Renderer::drawEntity(Entity& entity){
+void Renderer::drawEntity(Entity& entity, int escale){
     SDL_Rect src;
     src.x = entity.getCurrentFrame().x;
     src.y = entity.getCurrentFrame().y;
@@ -40,12 +40,19 @@ void Renderer::drawEntity(Entity& entity){
     src.h = entity.getCurrentFrame().h;
 
     SDL_Rect dst;
-    dst.x = entity.getX();
-    dst.y = entity.getY();
-    dst.w = entity.getCurrentFrame().w; 
-    dst.h = entity.getCurrentFrame().h;
+    dst.x = entity.getX() * escale;
+    dst.y = entity.getY() * escale;
+    dst.w = entity.getCurrentFrame().w * escale; 
+    dst.h = entity.getCurrentFrame().h * escale;
 
     SDL_RenderCopy(gRenderer, entity.getTexture(), &src, &dst);
+}
+
+void Renderer::updateEntityAnimatinon(Entity* entity, int timeBetweenFrames, int animationFrames){
+    entity->updateCurrentFrame(
+        entity->getCurrentFrame().w * int((SDL_GetTicks() / timeBetweenFrames) % animationFrames),
+        0
+    );
 }
 
 void Renderer::destroyEntity(Entity* entity){

@@ -7,13 +7,15 @@ int main(int argc, char** argv){
     Renderer renderer(window.getWindow());
 
     Color color = {0xFF, 0xFF, 0xFF, 0xFF};
-    Entity entity1(renderer.loadTexture("images/sprite_sheet.png"), 50.f, 50.f, 32, 32);
+    Entity entity1(renderer.loadTexture("images/sprite_sheet.png"), 50.f, 50.f, 64, 64);
+    Entity entity2(renderer.loadTexture("images/rectangle.png"), 10.f, 10.f, 64, 64);
 
     while(window.isOpen()){
         window.handleEvents();
         renderer.clear(color);
-        renderer.drawEntity(entity1);
-        entity1.update();
+        renderer.drawEntity(entity1, 4);
+        renderer.drawEntity(entity2, 1);
+        renderer.updateEntityAnimatinon(&entity1, 750, 4);
 
         renderer.draw();
     }
