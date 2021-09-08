@@ -6,7 +6,7 @@
 
 class Entity {
 public:
-    Entity(SDL_Texture* texture, float xpos, float ypos);
+    Entity(SDL_Texture* texture, float xpos, float ypos, float w, float h);
     ~Entity();
 
     float getX();
@@ -14,7 +14,7 @@ public:
     SDL_Texture* getTexture();
     SDL_Rect     getCurrentFrame();
 
-    void init();
+    void update();
 private:
     float gX = 0;
     float gY = 0;

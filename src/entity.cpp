@@ -1,14 +1,14 @@
 #include "entity.h"
 
-Entity::Entity(SDL_Texture* texture, float xpos, float ypos){
+Entity::Entity(SDL_Texture* texture, float xpos, float ypos, float w, float h){
     gTexture = texture;
     gX = xpos;
     gY = ypos;
     
     gCurrentFrame.x = 0;
     gCurrentFrame.y = 0;
-    gCurrentFrame.w = 32;
-    gCurrentFrame.h = 32;
+    gCurrentFrame.w = w;
+    gCurrentFrame.h = h;
 }
 
 Entity::~Entity(){
@@ -29,4 +29,8 @@ SDL_Texture* Entity::getTexture(){
 
 SDL_Rect Entity::getCurrentFrame(){
     return gCurrentFrame;
+}
+
+void Entity::update(){
+    gCurrentFrame.x = 32 * int((SDL_GetTicks() / 1000) % 4);
 }
