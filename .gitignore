@@ -2,4 +2,9 @@
 !.cpp
 !src/
 
+lib/
+include/
+
+.vscode/
+
 program

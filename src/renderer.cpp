@@ -20,7 +20,7 @@ void Renderer::draw(){
     SDL_RenderPresent(gRenderer);
 }
 
-SDL_Texture* Renderer::loadSprite(const char* file){
+SDL_Texture* Renderer::loadTexture(const char* file){
     SDL_Surface* temp = NULL;
     SDL_Texture* texture = NULL;
 
@@ -32,18 +32,24 @@ SDL_Texture* Renderer::loadSprite(const char* file){
     return texture;
 }
 
-void Renderer::drawSprite(Sprite sprite, uint32_t xpos, uint32_t ypos, uint32_t w, uint32_t h){
-    sprite.rect.x = xpos;
-    sprite.rect.y = ypos;
-    sprite.rect.w = w;
-    sprite.rect.h = h;
-    
-    SDL_RenderCopy(gRenderer, sprite.texture, NULL, &sprite.rect);
-    SDL_RenderPresent(gRenderer);
+void Renderer::drawEntity(Entity& entity){
+    SDL_Rect src;
+    src.x = entity.getCurrentFrame().x;
+    src.y = entity.getCurrentFrame().y;
+    src.w = entity.getCurrentFrame().w;
+    src.h = entity.getCurrentFrame().h;
+
+    SDL_Rect dst;
+    dst.x = entity.getX() * 4;
+    dst.y = entity.getY() * 4;
+    dst.w = entity.getCurrentFrame().w * 4;
+    dst.h = entity.getCurrentFrame().h * 4;
+
+    SDL_RenderCopy(gRenderer, entity.getTexture(), &src, &dst);
 }
 
-void Renderer::destroyTexture(SDL_Texture* texture){
-    SDL_DestroyTexture(texture);
+void Renderer::destroyEntity(Entity* entity){
+    SDL_DestroyTexture(entity->getTexture());
 }
 
 SDL_Renderer* Renderer::getRenderer(){

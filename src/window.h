@@ -26,11 +26,11 @@ private:
     bool initWindow();    
 
     /* Variables */
-    SDL_Window* gWindow = NULL;
+    SDL_Window*  gWindow = NULL;
 
-    const char* name;
+    const char*  name;
     unsigned int width, height;
-    bool running;
+    bool         running;
 };
 
 #endif /* WINDOW_H */
