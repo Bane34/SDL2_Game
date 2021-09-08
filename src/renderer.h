@@ -16,6 +16,7 @@ public:
     void draw();
     SDL_Texture* loadTexture(const char* file);
     void drawEntity(Entity& entity);
+    //void updateEntityAnimatino(Entity& entity, int );
     void destroyEntity(Entity* entity);
 
     SDL_Renderer* getRenderer();

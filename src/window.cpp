@@ -35,8 +35,19 @@ void Window::handleEvents(){
     SDL_Event event;
 
     while(SDL_PollEvent(&event)){
-        if(event.type == SDL_QUIT) {
+        switch(event.type){
+        case SDL_QUIT:
             running = false;
+            break;
+        
+        case SDL_WINDOWEVENT:
+            if(event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED){
+                width  = event.window.data1;
+                height = event.window.data2;
+            }
+            
+        default:
+            continue;
         }
     }
 }
@@ -70,7 +81,7 @@ void Window::close(){
 bool Window::initWindow(){
     int flags;
 
-    flags = SDL_WINDOW_SHOWN;
+    flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
     if(this->fullscreen)
         flags |= SDL_WINDOW_FULLSCREEN;
 

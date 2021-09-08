@@ -3,7 +3,7 @@
 #include "entity.h"
 
 int main(int argc, char** argv){
-    Window window("SDL test", 0, 0);
+    Window window("SDL test", 0, 0, false);
     Renderer renderer(window.getWindow());
 
     Color color = {0xFF, 0xFF, 0xFF, 0xFF};
