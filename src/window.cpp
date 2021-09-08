@@ -1,7 +1,10 @@
 #include "window.h"
 
-Window::Window(const char* name, uint32_t w, uint32_t h){ 
+Window::Window(const char* name, uint32_t w, uint32_t h, bool fullscreen){ 
     this->name = name;
+
+    if(fullscreen)
+        this->fullscreen = true;
 
     // If the width or the height are 0
     // The window will use the default width and height
@@ -65,13 +68,19 @@ void Window::close(){
 }
 
 bool Window::initWindow(){
+    int flags;
+
+    flags = SDL_WINDOW_SHOWN;
+    if(this->fullscreen)
+        flags |= SDL_WINDOW_FULLSCREEN;
+
     gWindow = SDL_CreateWindow(
         this->name,
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
         this->width,
         this->width,
-        SDL_WINDOW_SHOWN
+        flags
     );
 
     if(!gWindow){

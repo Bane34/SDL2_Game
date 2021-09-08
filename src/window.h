@@ -10,7 +10,7 @@
 
 class Window {
 public:
-    Window(const char* name, uint32_t w, uint32_t h);
+    Window(const char* name, uint32_t w, uint32_t h, bool fullscreen);
     ~Window();
 
     void handleEvents(); 
@@ -31,6 +31,7 @@ private:
     const char*  name;
     unsigned int width, height;
     bool         running;
+    bool         fullscreen;
 };
 
 #endif /* WINDOW_H */
