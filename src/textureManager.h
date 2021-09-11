@@ -1,0 +1,24 @@
+#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <string>
+#include <map>
+
+class TextureManager{
+public:
+    TextureManager() {}
+
+    bool load(std::string p_fileName, std::string p_id, SDL_Renderer* p_renderer);
+    void draw(std::string p_id, int p_x, int p_y, int p_width, int p_height, SDL_Renderer* p_renderer, SDL_RendererFlip p_flip);
+    void drawFrame(std::string p_id, int p_x, int p_y, int p_width, int p_height, int p_currentRow, int p_currentFrame, SDL_Renderer* p_renderer, SDL_RendererFlip p_flip);
+
+    
+private:
+    
+    std::map<std::string, SDL_Texture*> m_TextureMap;
+
+};
+
+#endif /* TEXTUREMANAGER_H */

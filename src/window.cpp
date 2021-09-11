@@ -34,6 +34,25 @@ Window::~Window(){
     close();
 }
 
+void Window::clear(Color p_color){
+    SDL_SetRenderDrawColor(m_Renderer, p_color.r, p_color.g, p_color.b, p_color.a);
+    SDL_RenderClear(m_Renderer);
+}
+
+void Window::render(){
+    m_TextureManager.load("images/sprite_sheet.png", "animate", m_Renderer);
+    //m_TextureManager.draw("animate", 0, 0, 64, 256, m_Renderer, SDL_FLIP_NONE);
+    m_TextureManager.drawFrame("animate", 100, 100, 64, 256, 1, m_CurrentFrame, m_Renderer, SDL_FLIP_NONE);
+}
+
+void Window::windowDraw(){
+    SDL_RenderPresent(m_Renderer);
+}
+
+void Window::update(){
+    m_CurrentFrame = int((SDL_GetTicks() / 500) % 4);
+}
+
 void Window::handleEvents(){
     SDL_Event event;
 
