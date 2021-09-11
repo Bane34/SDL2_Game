@@ -1,51 +1,53 @@
 #include "window.h"
 
-Window::Window(const char* name, uint32_t w, uint32_t h, bool fullscreen){ 
-    this->name = name;
-
-    if(fullscreen)
-        this->fullscreen = true;
-
-    // If the width or the height are 0
-    // The window will use the default width and height
-    // 480 and 640 respectively
-    if(w == 0 || h == 0){
-        this->width = DEFAULT_WINDOW_WIDTH;         
-        this->height = DEFAULT_WINDOW_HEIGHT;
-    }
-    else{
-        this->width = w;
-        this->height = h;
-    }
-
-    if(!init()){
-        printf("Could not init the window\n");
+Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flags){
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
+        printf("Could not init SDL! SDL_ERROR: %s\n", SDL_GetError());
         return;
     }
 
-    running = true;
+    if(!IMG_Init(IMG_INIT_PNG)){
+        printf("Could not init IMG_PNG! IMG_Error: %s\n", IMG_GetError());
+        return;
+    }
+    
+    m_Name   = p_name;
+    m_Width  = p_width;
+    m_Height = p_height;
+    m_Flags  = flags;
+
+    if(!initWindow()){
+        printf("Could not create the window! SDL_ERROR: %s\n", SDL_GetError());
+        return;
+    }
+
+    if(!initRenderer()){
+        printf("Could not create the renderer! SDL_ERROR: %s\n", SDL_GetError());
+        return;
+    }
+
+    m_Running = true;
+    printf("Window working!\n");
 }
 
 Window::~Window(){
-    close();    
+    close();
 }
 
 void Window::handleEvents(){
-    //--- Poll the events ---//    
     SDL_Event event;
 
     while(SDL_PollEvent(&event)){
-        switch(event.type){
+        switch (event.type) {
         case SDL_QUIT:
-            running = false;
+            m_Running = false;
             break;
-        
         case SDL_WINDOWEVENT:
             if(event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED){
-                width  = event.window.data1;
-                height = event.window.data2;
+                m_Width  = event.window.data1;
+                m_Height = event.window.data2;
             }
-            
+            break;
         default:
             continue;
         }
@@ -53,51 +55,50 @@ void Window::handleEvents(){
 }
 
 bool Window::isOpen(){
-    return (running)? true : false;
+    return m_Running;
 }
 
 SDL_Window* Window::getWindow(){
-    return gWindow;
+    return m_Window;
 }
 
-bool Window::init(){
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        printf("SDL could not init! SDL_ERROR: %s\n", SDL_GetError());
-        return false;
-    }
-
-    IMG_Init(IMG_INIT_PNG);
-
-    return (initWindow())? true : false;    
-}
-
-void Window::close(){
-    SDL_DestroyWindow(gWindow);
-
-    IMG_Quit();
-    SDL_Quit();
+SDL_Renderer* Window::getRenderer(){
+    return m_Renderer;
 }
 
 bool Window::initWindow(){
-    int flags;
-
-    flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
-    if(this->fullscreen)
-        flags |= SDL_WINDOW_FULLSCREEN;
-
-    gWindow = SDL_CreateWindow(
-        this->name,
+    m_Window = SDL_CreateWindow(
+        m_Name,
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        this->width,
-        this->width,
-        flags
+        m_Width,
+        m_Height,
+        m_Flags
     );
 
-    if(!gWindow){
-        printf("Could not make a window! SDL_ERROR: %s\n", SDL_GetError());
+    if(!m_Window)
         return false;
-    }
 
     return true;
+}
+
+bool Window::initRenderer(){
+    m_Renderer = SDL_CreateRenderer(
+        m_Window,
+        -1,
+        0
+    );
+
+    if(!m_Renderer)
+        return false;
+
+    return true;
+}
+
+void Window::close(){
+    SDL_DestroyWindow(m_Window);
+    SDL_DestroyRenderer(m_Renderer);
+
+    SDL_Quit();
+    IMG_Quit();
 }

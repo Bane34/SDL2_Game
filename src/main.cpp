@@ -1,26 +1,13 @@
 #include "window.h"
-#include "renderer.h"
-#include "entity.h"
 
 int main(int argc, char** argv){
-    Window window("SDL test", 0, 0, false);
-    Renderer renderer(window.getWindow());
+    int flags = WINDOW_SHOWN | OPENGL | RESIZABLE;
 
-    Color color = {0xFF, 0xFF, 0xFF, 0xFF};
-    Entity entity1(renderer.loadTexture("images/sprite_sheet.png"), 50.f, 50.f, 64, 64);
-    Entity entity2(renderer.loadTexture("images/rectangle.png"), 10.f, 10.f, 64, 64);
+    Window window("SDL window", 640, 480, flags);
 
     while(window.isOpen()){
         window.handleEvents();
-        renderer.clear(color);
-        renderer.drawEntity(entity1, 4);
-        renderer.drawEntity(entity2, 1);
-        renderer.updateEntityAnimatinon(&entity1, 750, 4);
-
-        renderer.draw();
     }
-
-    renderer.destroyEntity(&entity1);
 
     return 0;
 }

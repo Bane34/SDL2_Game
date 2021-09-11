@@ -5,33 +5,41 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 
-#define DEFAULT_WINDOW_HEIGHT 480
-#define DEFAULT_WINDOW_WIDTH  640
+// Definition of the window flags //
+
+enum flags {
+    FULLSCREEN   = SDL_WINDOW_FULLSCREEN,
+    WINDOW_SHOWN = SDL_WINDOW_SHOWN,
+    OPENGL       = SDL_WINDOW_OPENGL,
+    RESIZABLE    = SDL_WINDOW_RESIZABLE
+};
 
 class Window {
 public:
-    Window(const char* name, uint32_t w, uint32_t h, bool fullscreen);
+    Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flags);
     ~Window();
 
     void handleEvents(); 
 
     bool isOpen();
-    SDL_Window* getWindow();
+    SDL_Window*   getWindow();
+    SDL_Renderer* getRenderer();
 
 private:
     /* Methods */
-    bool init();
-    void close();
-
     bool initWindow();    
+    bool initRenderer();
 
+    void close();
+    
     /* Variables */
-    SDL_Window*  gWindow = NULL;
-
-    const char*  name;
-    unsigned int width, height;
-    bool         running;
-    bool         fullscreen;
+    SDL_Window*   m_Window = NULL;
+    SDL_Renderer* m_Renderer = NULL;
+    const char*   m_Name;
+    unsigned int  m_Width, m_Height;
+    int           m_Flags = 0;
+    bool          m_Running;
+    
 };
 
 #endif /* WINDOW_H */
