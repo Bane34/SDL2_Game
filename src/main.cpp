@@ -1,6 +1,8 @@
 #include "window.h"
 #include "textureManager.h"
 
+TextureManager* TextureManager::s_pInstance = 0;
+
 int main(int argc, char** argv){
     int flags = WINDOW_SHOWN | OPENGL | RESIZABLE;
 

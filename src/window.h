@@ -47,7 +47,6 @@ private:
     int            m_Flags = 0;
     bool           m_Running;
 
-    TextureManager m_TextureManager;
     int            m_CurrentFrame;
 };
 

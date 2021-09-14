@@ -40,9 +40,9 @@ void Window::clear(Color p_color){
 }
 
 void Window::render(){
-    m_TextureManager.load("images/sprite_sheet.png", "animate", m_Renderer);
-    //m_TextureManager.draw("animate", 0, 0, 64, 256, m_Renderer, SDL_FLIP_NONE);
-    m_TextureManager.drawFrame("animate", 100, 100, 64, 256, 1, m_CurrentFrame, m_Renderer, SDL_FLIP_NONE);
+    TextureManager::getInstance()->load("images/sprite_sheet.png", "animate", m_Renderer);
+    //TextureManager::getInstance()->draw("animate", 0, 0, 64, 256, m_Renderer, SDL_FLIP_NONE);
+    TextureManager::getInstance()->drawFrame("animate", 100, 100, 64, 256, 1, m_CurrentFrame, m_Renderer, SDL_FLIP_NONE);
 }
 
 void Window::windowDraw(){
