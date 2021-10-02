@@ -41,7 +41,6 @@ void Window::clear(Color p_color){
 
 void Window::render(){
     TextureManager::getInstance()->load("images/sprite_sheet.png", "animate", m_Renderer);
-    //TextureManager::getInstance()->draw("animate", 0, 0, 64, 256, m_Renderer, SDL_FLIP_NONE);
     TextureManager::getInstance()->drawFrame("animate", 100, 100, 64, 256, 1, m_CurrentFrame, m_Renderer, SDL_FLIP_NONE);
 }
 
@@ -77,11 +76,11 @@ bool Window::isOpen(){
     return m_Running;
 }
 
-SDL_Window* Window::getWindow(){
+SDL_Window* Window::getWindow() const{
     return m_Window;
 }
 
-SDL_Renderer* Window::getRenderer(){
+SDL_Renderer* Window::getRenderer() const{
     return m_Renderer;
 }
 
@@ -115,8 +114,8 @@ bool Window::initRenderer(){
 }
 
 void Window::close(){
-    SDL_DestroyWindow(m_Window);
     SDL_DestroyRenderer(m_Renderer);
+    SDL_DestroyWindow(m_Window);
 
     SDL_Quit();
     IMG_Quit();

@@ -29,8 +29,8 @@ public:
     void handleEvents(); 
 
     bool isOpen();
-    SDL_Window*   getWindow();
-    SDL_Renderer* getRenderer();
+    SDL_Window*   getWindow()   const;
+    SDL_Renderer* getRenderer() const;
 
 private:
     /* Methods */
