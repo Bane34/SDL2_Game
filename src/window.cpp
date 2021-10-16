@@ -40,8 +40,10 @@ void Window::clear(Color p_color){
 }
 
 void Window::render(){
+    /*
     TextureManager::getInstance()->load("images/sprite_sheet.png", "animate", m_Renderer);
     TextureManager::getInstance()->drawFrame("animate", 100, 100, 64, 256, 1, m_CurrentFrame, m_Renderer, SDL_FLIP_NONE);
+    */
 }
 
 void Window::windowDraw(){
@@ -49,7 +51,9 @@ void Window::windowDraw(){
 }
 
 void Window::update(){
+    /*
     m_CurrentFrame = int((SDL_GetTicks() / 500) % 4);
+    */
 }
 
 void Window::handleEvents(){
