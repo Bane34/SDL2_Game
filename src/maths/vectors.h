@@ -16,6 +16,10 @@ struct Vec2{
     friend Vec2 operator+(Vec2 left, const Vec2& right);
     friend Vec2 operator-(Vec2 left, const Vec2& right);
 
+    // We multiply or divide a vector with an scalar !!NOT TO VECTORS, ONLY A SCALAR!!
+    Vec2 operator*(const float& k);
+    Vec2 operator/(const float& k);
+
     Vec2 operator+=(const Vec2& other);
     Vec2 operator-=(const Vec2& other);
 
