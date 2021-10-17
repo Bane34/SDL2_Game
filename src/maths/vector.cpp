@@ -32,6 +32,39 @@ Vec2 operator-(Vec2 left, const Vec2& right){
     return left.substract(right);
 }
 
+Vec2 Vec2::operator*(const float& k){
+    x = x * k;
+    y = y * k;
+
+    return *this;
+}
+
+Vec2 Vec2::operator/(const float& k){
+    if(k == 0){
+        printf("Cant divide by 0\n");
+        return *this;
+    }
+
+    x = x / k;
+    y = y / k;
+
+    return *this;
+}
+
+Vec2 Vec2::operator+=(const Vec2& other){
+    x += other.x;
+    y += other.y;
+
+    return *this;
+}
+
+Vec2 Vec2::operator-=(const Vec2& other){
+    x -= other.x;
+    y -= other.y;
+
+    return *this;
+}
+
 bool Vec2::operator==(const Vec2& other){
     return (x == other.x && y == other.y);
 }
