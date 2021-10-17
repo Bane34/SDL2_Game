@@ -19,13 +19,6 @@ int main(int argc, char** argv){
     uint64_t LAST = 0l;
     double deltaTime = 0;
 
-    Vec2 vec1(4, 3);
-    std::cout << vec1;
-    
-    vec1.add({4, 3});
-    std::cout << vec1;
-    std::cout << "Length of vec1: " << vec1.length() << '\n';
-
     GameObject obj1;
     obj1.load(10.f, 100.f, 64, 256, "images/sprite_sheet.png", "Animate1", window.getRenderer());
 
@@ -33,7 +26,7 @@ int main(int argc, char** argv){
         LAST = NOW;
         NOW = SDL_GetPerformanceCounter();
         deltaTime = (double) ( (NOW - LAST) * 1000 / (double) SDL_GetPerformanceFrequency() );
-        std::cout << "Delta time: " << deltaTime << '\n';
+        //std::cout << "Delta time: " << deltaTime << '\n';
 
         window.handleEvents();
         window.clear(color);
