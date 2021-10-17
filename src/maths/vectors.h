@@ -29,6 +29,7 @@ struct Vec2{
     friend std::ostream& operator<<(std::ostream& stream, const Vec2& vector);
 
     float length();
+    Vec2& unitary();
 };
 
 #endif /* VECTORS_H */

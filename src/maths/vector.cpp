@@ -82,3 +82,12 @@ std::ostream& operator<<(std::ostream& stream, const Vec2& vector){
 float Vec2::length(){
     return SDL_sqrt(x * x + y * y);
 }
+
+Vec2& Vec2::unitary(){
+    float length = (*this).length();
+
+    x = x / length;
+    y = y / length;
+
+    return *this;
+}
