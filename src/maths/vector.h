@@ -1,5 +1,5 @@
-#ifndef VECTORS_H
-#define VECTORS_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <SDL2/SDL_stdinc.h>
 #include <iostream>
@@ -29,7 +29,8 @@ struct Vec2{
     friend std::ostream& operator<<(std::ostream& stream, const Vec2& vector);
 
     float length();
-    Vec2& unitary();
+    Vec2& makeUnitary();
+    static Vec2 getUnitary(float p_x, float p_y);
 };
 
-#endif /* VECTORS_H */
+#endif /* VECTOR_H */
