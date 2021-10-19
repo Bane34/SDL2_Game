@@ -1,4 +1,4 @@
-#include "vectors.h"
+#include "vector.h"
 
 Vec2::Vec2(){
     x = 0;
@@ -83,11 +83,16 @@ float Vec2::length(){
     return SDL_sqrt(x * x + y * y);
 }
 
-Vec2& Vec2::unitary(){
+Vec2& Vec2::makeUnitary(){
     float length = (*this).length();
 
     x = x / length;
     y = y / length;
 
     return *this;
+}
+
+Vec2 Vec2::getUnitary(float p_x, float p_y){
+    Vec2 retVec(p_x, p_y);
+    return (retVec / retVec.length());
 }
