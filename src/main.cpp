@@ -1,8 +1,9 @@
 #include "window.h"
 #include "textureManager.h"
 #include "gameObject.h"
-#include "maths/vectors.h"
+#include "maths/vector.h"
 #include "utils/colors.h"
+#include "utils/logger.h"
 
 #include <iostream> // Only for printing vectors, use printf whenever is possible
 #include <string>
@@ -18,6 +19,9 @@ int main(int argc, char** argv){
     uint64_t NOW = SDL_GetPerformanceCounter();
     uint64_t LAST = 0l;
     double deltaTime = 0;
+
+    Logger::getInstance()->logFormat(Logger::BROADCAST, "Logging with: %s", "format");
+    Logger::getInstance()->log(Logger::WARNING, "Loggin without format");
 
     GameObject obj1;
     obj1.load(10.f, 100.f, 64, 256, "images/sprite_sheet.png", "Animate1", window.getRenderer());
