@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <cstdio>
-#include <string>
 #include <cstring>
 #include <cstdarg>
 
@@ -20,10 +19,11 @@ public:
     enum logModes{
         ERROR     = 1,
         WARNING   = 2,
-        BROADCAST = 3
+        BROADCAST = 3,
+        DEBUG     = 4
     };
 
-    void log(int p_mode, const std::string& p_message);
+    void log(int p_mode, const char* p_message);
     void logFormat(int p_mode, const char* p_format, ...);
     
     static Logger* getInstance();

@@ -2,19 +2,22 @@
 
 Logger* Logger::s_pInstace = NULL;
 
-void Logger::log(int p_mode, const std::string& p_message){
+void Logger::log(int p_mode, const char* p_message){
     switch(p_mode){
     case 1:
-        std::cout << ANSI_COLOR_RED    << "[ERROR!]: "   << ANSI_COLOR_RESET << p_message << '\n';
+        fprintf(stderr, "%s[ERROR!]:%s %s\n", ANSI_COLOR_RED, ANSI_COLOR_RESET, p_message);
         break;
     case 2:
-        std::cout << ANSI_COLOR_YELLOW << "[WARNING!]: " << ANSI_COLOR_RESET << p_message << '\n';
+        fprintf(stdout, "%s[WARNING!]:%s %s\n", ANSI_COLOR_YELLOW, ANSI_COLOR_RESET, p_message);
         break;
     case 3:
-        std::cout << ANSI_COLOR_GREEN  << "[MESSAGE!]: " << ANSI_COLOR_RESET << p_message << '\n';
+        fprintf(stdout, "%s[MESSAGE!]: %s %s\n", ANSI_COLOR_GREEN, ANSI_COLOR_RESET, p_message);
+        break;
+    case 4:
+        fprintf(stdout, "%s[DEBUG!]: %s %s\n", ANSI_COLOR_BLUE, ANSI_COLOR_RESET, p_message);
         break;
     default:
-        std::cout << ANSI_COLOR_GREEN  << "[MESSAGE!]: " << ANSI_COLOR_RESET << p_message << '\n';
+        fprintf(stdout, "%s[MESSAGE!]: %s %s\n", ANSI_COLOR_GREEN, ANSI_COLOR_RESET, p_message);
         break;
     }
 }
@@ -31,19 +34,24 @@ void Logger::logFormat(int p_mode, const char* p_format, ...){
         fprintf(stderr, "\n");
         break;
     case 2:
-        fprintf(stderr, "%s[WARNING!]:%s ", ANSI_COLOR_YELLOW, ANSI_COLOR_RESET);
-        vfprintf(stderr, p_format, args);
-        fprintf(stderr, "\n");
+        fprintf(stdout, "%s[WARNING!]:%s ", ANSI_COLOR_YELLOW, ANSI_COLOR_RESET);
+        vfprintf(stdout, p_format, args);
+        fprintf(stdout, "\n");
         break;
     case 3:
-        fprintf(stderr, "%s[MESSAGE!]:%s ", ANSI_COLOR_GREEN, ANSI_COLOR_RESET);
-        vfprintf(stderr, p_format, args);
-        fprintf(stderr, "\n");
+        fprintf(stdout, "%s[MESSAGE!]:%s ", ANSI_COLOR_GREEN, ANSI_COLOR_RESET);
+        vfprintf(stdout, p_format, args);
+        fprintf(stdout, "\n");
+        break;
+    case 4:
+        fprintf(stdout, "%s[DEBUG!]:%s ", ANSI_COLOR_BLUE, ANSI_COLOR_RESET);
+        vfprintf(stdout, p_format, args);
+        fprintf(stdout, "\n");
         break;
     default:
-        fprintf(stderr, "%s[MESSAGE!]:%s ", ANSI_COLOR_GREEN, ANSI_COLOR_RESET);
-        vfprintf(stderr, p_format, args);
-        fprintf(stderr, "\n");
+        fprintf(stdout, "%s[MESSAGE!]:%s ", ANSI_COLOR_GREEN, ANSI_COLOR_RESET);
+        vfprintf(stdout, p_format, args);
+        fprintf(stdout, "\n");
         break;
     }
 
