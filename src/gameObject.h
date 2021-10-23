@@ -7,7 +7,7 @@
 #include <string>
 
 #include "textureManager.h"
-#include "maths/vectors.h"
+#include "maths/vector.h"
 
 class GameObject{
 public:
@@ -16,7 +16,7 @@ public:
     void update();
     void clean();
 
-    void updateXY(Vec2 p_vector);
+    void updateXY(const Vec2& p_vector);
 protected:
     std::string m_TextureID;
     std::string m_FileName;

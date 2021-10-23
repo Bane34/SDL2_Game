@@ -36,7 +36,7 @@ void GameObject::update(){
     m_CurrentFrame = int((SDL_GetTicks() / 500) % 4);
 }
 
-void GameObject::updateXY(Vec2 p_vector){
+void GameObject::updateXY(const Vec2& p_vector){
     m_X = m_X + p_vector.x;
     m_Y = m_Y + p_vector.y;
 }
