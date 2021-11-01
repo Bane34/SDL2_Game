@@ -26,8 +26,7 @@ void Logger::logFormat(int p_mode, const char* p_format, ...){
     va_list args;
     va_start(args, p_format);
 
-    switch (p_mode)
-    {
+    switch (p_mode) {
     case 1:
         fprintf(stderr, "%s[ERROR!]:%s ", ANSI_COLOR_RED, ANSI_COLOR_RESET);
         vfprintf(stderr, p_format, args);
