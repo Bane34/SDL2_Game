@@ -2,6 +2,7 @@
 #define MAT2_H
 
 #include "vector.h"
+#include "../utils/logger.h"
 
 #include <cmath>
 #include <iostream>
@@ -27,7 +28,9 @@ struct Mat2 {
     Mat2& multiply(const Mat2& p_other);
 
     friend Mat2 operator*(Mat2 left, const Mat2& right);
-    friend Mat2 operator/(Mat2 left, const Mat2& right);
+
+    Mat2& operator*=(const float& k);
+    Mat2& operator/=(const float& k);
 
 };
 

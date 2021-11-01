@@ -2,6 +2,7 @@
 #include "textureManager.h"
 #include "gameObject.h"
 #include "maths/vector.h"
+#include "maths/mat2.h"
 #include "utils/colors.h"
 #include "utils/logger.h"
 
@@ -20,11 +21,8 @@ int main(int argc, char** argv){
     uint64_t LAST = 0l;
     double deltaTime = 0;
 
-    Vec2 vec(3.f, 4.f);
-
     Logger::getInstance()->logFormat(Logger::BROADCAST, "Logging with: %s", "format");
     Logger::getInstance()->log(Logger::WARNING, "Loggin without format");
-    Logger::getInstance()->logFormat(Logger::DEBUG, "Vector: (%.2f, %.2f)\n", vec.x, vec.y);
 
     GameObject obj1;
     obj1.load(10.f, 100.f, 64, 256, "images/sprite_sheet.png", "Animate1", window.getRenderer());
@@ -33,7 +31,6 @@ int main(int argc, char** argv){
         LAST = NOW;
         NOW = SDL_GetPerformanceCounter();
         deltaTime = (double) ( (NOW - LAST) * 1000 / (double) SDL_GetPerformanceFrequency() );
-        //std::cout << "Delta time: " << deltaTime << '\n';
 
         window.handleEvents();
         window.clear(color);
