@@ -61,3 +61,52 @@ std::ostream& operator<<(std::ostream& stream, const Mat2& mat){
 
     return stream;
 }
+
+Mat2& Mat2::multiply(const Mat2& other){
+    int sum = 0;
+
+    Mat2 aux = *this;
+
+    for(int k = 0; k < 2; k++){
+        for(int i = 0; i < 2; i++){
+            for(int j =0 ; j < 2; j++){
+                //std::cout << elements[j + k * 2] << " * " << other.elements[i + j * 2] << std::endl;
+                sum += aux.elements[j + k * 2] * other.elements[i + j * 2];
+            }
+
+            elements[i + k * 2] = sum;
+            sum = 0;
+        }
+    }
+
+    return *this;
+}
+
+Mat2 operator*(Mat2 left, const Mat2& right){
+    return left.multiply(right);
+}
+
+Mat2& Mat2::operator*=(const float& k){
+    for(int i = 0; i < 4; i++){
+        elements[i] *= k;
+    }
+
+    return *this;
+}
+
+Mat2& Mat2::operator/=(const float& k){
+    if(k == 0){
+        Logger::getInstance()->log(Logger::WARNING, "dividing by 0, setting all the elements to 0");
+
+        for(int i = 0; i < 4; i++){
+            elements[i] = 0;
+        }
+    }
+    else{
+        for(int i = 0; i < 4; i++){
+            elements[i] /= k;
+        }
+    }
+
+    return *this;
+}
