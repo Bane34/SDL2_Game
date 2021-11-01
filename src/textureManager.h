@@ -11,6 +11,7 @@ public:
     bool load(std::string p_fileName, std::string p_id, SDL_Renderer* p_renderer);
     void draw(std::string p_id, int p_x, int p_y, int p_width, int p_height, SDL_Renderer* p_renderer, SDL_RendererFlip p_flip);
     void drawFrame(std::string p_id, int p_x, int p_y, int p_width, int p_height, int p_currentRow, int p_currentFrame, SDL_Renderer* p_renderer, SDL_RendererFlip p_flip);
+    void dropTexture(std::string p_id);
 
     static TextureManager* getInstance(){
         if(s_pInstance == 0){
