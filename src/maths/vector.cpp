@@ -1,10 +1,5 @@
 #include "vector.h"
 
-Vec2::Vec2(){
-    x = 0;
-    y = 0;
-}
-
 Vec2::Vec2(const float& p_x, const float& p_y){
     x = p_x;
     y = p_y;

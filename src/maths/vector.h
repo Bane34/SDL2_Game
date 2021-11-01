@@ -7,7 +7,7 @@
 struct Vec2{
     float x, y;
 
-    Vec2();
+    Vec2() = default;
     Vec2(const float& p_x, const float& p_y);
 
     Vec2& add(const Vec2& p_other);

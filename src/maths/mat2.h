@@ -9,7 +9,11 @@
 
 
 struct Mat2 {
-    float elements[2 * 2];
+    union {
+        float elements[2 * 2];
+        Vec2  rows[2];
+    };
+    
 
     Mat2();
     Mat2(Vec2 p_diagonal);
