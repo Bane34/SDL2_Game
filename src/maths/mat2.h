@@ -20,14 +20,12 @@ struct Mat2 {
     static Mat2 rotation(float p_angle);
     static Mat2 shear(Vec2 p_vec);
     
-    friend std::ostream& operator<<(std::ostream& stream, const Mat2& mat);
-    
-    //--- NOT IMPLEMENTED ---//
-    // TODO: Implement this
-
     Mat2& multiply(const Mat2& p_other);
+    float determinant();
+    Mat2& transpose();
 
     friend Mat2 operator*(Mat2 left, const Mat2& right);
+    friend std::ostream& operator<<(std::ostream& stream, const Mat2& mat);
 
     Mat2& operator*=(const float& k);
     Mat2& operator/=(const float& k);

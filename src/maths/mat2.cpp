@@ -82,6 +82,18 @@ Mat2& Mat2::multiply(const Mat2& other){
     return *this;
 }
 
+float Mat2::determinant(){
+    return elements[0] * elements[3] - elements[1] * elements[2];   
+}
+
+Mat2& Mat2::transpose(){
+    int temp = elements[1];
+    elements[1] = elements[2];
+    elements[2] = temp;
+
+    return *this;
+}
+
 Mat2 operator*(Mat2 left, const Mat2& right){
     return left.multiply(right);
 }
