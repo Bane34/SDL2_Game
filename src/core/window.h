@@ -31,11 +31,13 @@ public:
     bool isOpen();
     SDL_Window*   getWindow()   const;
     SDL_Renderer* getRenderer() const;
+    void getVersion();
 
 private:
     /* Methods */
     bool initWindow();    
     bool initRenderer();
+    bool initImgui();
 
     void close();
     
@@ -44,10 +46,9 @@ private:
     SDL_Renderer*  m_Renderer = NULL;
     const char*    m_Name;
     unsigned int   m_Width, m_Height;
-    int            m_Flags = 0;
+    int            m_RenderFlags = SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED;
+    int            m_WindowFlags;
     bool           m_Running;
-
-    int            m_CurrentFrame;
 };
 
 #endif /* WINDOW_H */

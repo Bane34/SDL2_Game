@@ -1,13 +1,13 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef VEC2_H
+#define VEC2_H
 
-#include <SDL2/SDL_stdinc.h>
+#include <cmath>
 #include <iostream>
 
 struct Vec2{
     float x, y;
 
-    Vec2() = default;
+    Vec2();
     Vec2(const float& p_x, const float& p_y);
 
     Vec2& add(const Vec2& p_other);
@@ -29,8 +29,10 @@ struct Vec2{
     friend std::ostream& operator<<(std::ostream& stream, const Vec2& vector);
 
     float length();
-    Vec2& makeUnitary();
-    static Vec2 getUnitary(float p_x, float p_y);
+    Vec2& normalize();
+    static Vec2 getNormal(const float& p_x, const float& p_y);
 };
 
-#endif /* VECTOR_H */
+typedef Vec2 v2;
+
+#endif /* VEC2_H */

@@ -1,4 +1,9 @@
-#include "vector.h"
+#include "vec2.h"
+
+Vec2::Vec2(){
+    x = 0.f;
+    y = 0.f;
+}
 
 Vec2::Vec2(const float& p_x, const float& p_y){
     x = p_x;
@@ -35,29 +40,22 @@ Vec2 Vec2::operator*(const float& k){
 }
 
 Vec2 Vec2::operator/(const float& k){
-    if(k == 0){
+    if(k == 0.f)
         printf("Cant divide by 0\n");
-        return *this;
+    else {
+        x = x / k;
+        y = y / k;
     }
-
-    x = x / k;
-    y = y / k;
 
     return *this;
 }
 
 Vec2 Vec2::operator+=(const Vec2& other){
-    x += other.x;
-    y += other.y;
-
-    return *this;
+    return this->add(other);
 }
 
 Vec2 Vec2::operator-=(const Vec2& other){
-    x -= other.x;
-    y -= other.y;
-
-    return *this;
+    return this->substract(other);
 }
 
 bool Vec2::operator==(const Vec2& other){
@@ -75,11 +73,11 @@ std::ostream& operator<<(std::ostream& stream, const Vec2& vector){
 }
 
 float Vec2::length(){
-    return SDL_sqrt(x * x + y * y);
+    return sqrt(x * x + y * y);
 }
 
-Vec2& Vec2::makeUnitary(){
-    float length = (*this).length();
+Vec2& Vec2::normalize(){
+    float length = this->length();
 
     x = x / length;
     y = y / length;
@@ -87,7 +85,7 @@ Vec2& Vec2::makeUnitary(){
     return *this;
 }
 
-Vec2 Vec2::getUnitary(float p_x, float p_y){
+Vec2 Vec2::getNormal(const float& p_x, const float& p_y){
     Vec2 retVec(p_x, p_y);
     return (retVec / retVec.length());
 }

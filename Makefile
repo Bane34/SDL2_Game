@@ -1,11 +1,10 @@
 OUT = program
-
 CC = g++
 
 CFLAGS = -Wall -Wextra -std=c++11 -O0
-LDFLAGS = -Llib -pthread -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lpng16 -lz -lGL
+LDFLAGS = -L./lib/imgui -pthread -lSDL2 -lSDL2main -lSDL2_image -lpng16 -lz -lGL -limgui -ldl
 
-INCLUDE = -Iinclude
+INCLUDE = -Isrc -Ilib
 
 CPPFILES = $(shell find src -maxdepth 2 -type f -name *.cpp)
 CPPOBJECTS = $(CPPFILES:.cpp=.o)

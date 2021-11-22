@@ -2,7 +2,6 @@
 !.cpp
 !src/
 
-lib/
 include/
 
 .vscode/

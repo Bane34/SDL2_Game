@@ -14,7 +14,7 @@ Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flag
     m_Name   = p_name;
     m_Width  = p_width;
     m_Height = p_height;
-    m_Flags  = flags;
+    m_WindowFlags  = flags;
 
     if(!initWindow()){
         printf("Could not create the window! SDL_ERROR: %s\n", SDL_GetError());
@@ -34,16 +34,13 @@ Window::~Window(){
     close();
 }
 
-void Window::clear(Color p_color){
+void Window::clear(Color p_color) {
     SDL_SetRenderDrawColor(m_Renderer, p_color.r, p_color.g, p_color.b, p_color.a);
     SDL_RenderClear(m_Renderer);
 }
 
 void Window::render(){
-    /*
-    TextureManager::getInstance()->load("images/sprite_sheet.png", "animate", m_Renderer);
-    TextureManager::getInstance()->drawFrame("animate", 100, 100, 64, 256, 1, m_CurrentFrame, m_Renderer, SDL_FLIP_NONE);
-    */
+
 }
 
 void Window::windowDraw(){
@@ -51,15 +48,14 @@ void Window::windowDraw(){
 }
 
 void Window::update(){
-    /*
-    m_CurrentFrame = int((SDL_GetTicks() / 500) % 4);
-    */
+
 }
 
 void Window::handleEvents(){
     SDL_Event event;
 
     while(SDL_PollEvent(&event)){
+
         switch (event.type) {
         case SDL_QUIT:
             m_Running = false;
@@ -88,6 +84,20 @@ SDL_Renderer* Window::getRenderer() const{
     return m_Renderer;
 }
 
+
+void Window::getVersion(){
+    SDL_version compiled;
+    SDL_version linked;
+
+    SDL_VERSION(&compiled);
+    SDL_GetVersion(&linked);
+
+    printf("We compiled against SDL version %d.%d.%d ...\n",
+       compiled.major, compiled.minor, compiled.patch);
+    printf("But we are linking against SDL version %d.%d.%d.\n",
+       linked.major, linked.minor, linked.patch);
+}
+
 bool Window::initWindow(){
     m_Window = SDL_CreateWindow(
         m_Name,
@@ -95,21 +105,14 @@ bool Window::initWindow(){
         SDL_WINDOWPOS_UNDEFINED,
         m_Width,
         m_Height,
-        m_Flags
+        m_WindowFlags
     );
 
-    if(!m_Window)
-        return false;
-
-    return true;
+    return (m_Window)? true : false;
 }
 
 bool Window::initRenderer(){
-    m_Renderer = SDL_CreateRenderer(
-        m_Window,
-        -1,
-        0
-    );
+    m_Renderer = SDL_CreateRenderer(m_Window, -1, m_RenderFlags);
 
     if(!m_Renderer)
         return false;
