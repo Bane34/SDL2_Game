@@ -31,7 +31,9 @@ Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flag
     }
 
     m_Running = true;
-    printf("Window working!\n");
+    
+    Logger::getInstance()->log(Logger::BROADCAST, "Window init!");
+
 }
 
 Window::~Window(){

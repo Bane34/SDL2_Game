@@ -10,6 +10,7 @@
 #include <imgui/src/imgui_impl_sdlrenderer.h>
 
 #include "utils/colors.h"
+#include "utils/logger.h"
 #include "textureManager.h"
 
 // Definition of the window flags //

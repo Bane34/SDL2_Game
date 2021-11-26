@@ -10,7 +10,7 @@ int main(int, char**){
     window.getVersion();
 
     ImVec4 clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
+    
     while(window.isOpen()){
         window.handleEvents();
 

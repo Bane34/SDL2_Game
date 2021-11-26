@@ -26,12 +26,16 @@ struct Properties{
 class GameObject: public IObject{
 public:
     GameObject(Properties* p_props): m_TextureID(p_props->textureID), m_Width(p_props->width), m_Height(p_props->height), m_Flip(p_props->flip){
-        
+        m_Transform = new Mat4(1.f);
+        m_Transform->elements[3 + 0 * 4] = p_props->x;
+        m_Transform->elements[3 + 1 * 4] = p_props->y;
     } 
 
     virtual void draw() = 0;
     virtual void update(float p_dt) = 0;
     virtual void clean() = 0;
+
+    inline void printTransform() { std::cout << m_Transform; }
 
 protected:
     Mat4* m_Transform;
