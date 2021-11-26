@@ -5,6 +5,10 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 
+#include <imgui/src/imgui.h>
+#include <imgui/src/imgui_impl_sdl.h>
+#include <imgui/src/imgui_impl_sdlrenderer.h>
+
 #include "utils/colors.h"
 #include "textureManager.h"
 
@@ -22,6 +26,8 @@ public:
     Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flags);
     ~Window();
 
+    void imGuiCreate();
+    void imGuiRender();
     void clear(Color p_color);
     void render();
     void windowDraw();

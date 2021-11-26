@@ -26,6 +26,10 @@ Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flag
         return;
     }
 
+    if(!initImgui()){
+        printf("Could not init imgui!");
+    }
+
     m_Running = true;
     printf("Window working!\n");
 }
@@ -34,13 +38,23 @@ Window::~Window(){
     close();
 }
 
+void Window::imGuiCreate(){
+    ImGui_ImplSDLRenderer_NewFrame();
+    ImGui_ImplSDL2_NewFrame(m_Window);
+    ImGui::NewFrame();
+}
+
+void Window::imGuiRender(){
+    ImGui::Render();
+}
+
 void Window::clear(Color p_color) {
     SDL_SetRenderDrawColor(m_Renderer, p_color.r, p_color.g, p_color.b, p_color.a);
     SDL_RenderClear(m_Renderer);
 }
 
 void Window::render(){
-
+    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Window::windowDraw(){
@@ -55,6 +69,8 @@ void Window::handleEvents(){
     SDL_Event event;
 
     while(SDL_PollEvent(&event)){
+
+        ImGui_ImplSDL2_ProcessEvent(&event);
 
         switch (event.type) {
         case SDL_QUIT:
@@ -120,7 +136,24 @@ bool Window::initRenderer(){
     return true;
 }
 
+bool Window::initImgui(){
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void) io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+
+    ImGui::StyleColorsDark();
+    ImGui_ImplSDL2_InitForSDLRenderer(m_Window);
+    ImGui_ImplSDLRenderer_Init(m_Renderer);
+
+    return true;
+}
+
 void Window::close(){
+    ImGui_ImplSDLRenderer_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
 

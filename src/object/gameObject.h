@@ -9,8 +9,9 @@
 
 struct Properties{
     Properties(const std::string& p_textureID, const float& p_x, const float& p_y, const int& p_width, const int& p_height, SDL_RendererFlip p_flip = SDL_FLIP_NONE){
-        m_TextureID = p_textureID;
+        textureID = p_textureID;
         x = p_x;
+        y = p_y;
         width = p_width;
         height = p_height;
         flip = p_flip;
@@ -24,7 +25,9 @@ struct Properties{
 
 class GameObject: public IObject{
 public:
-    GameObject() {}
+    GameObject(Properties* p_props): m_TextureID(p_props->textureID), m_Width(p_props->width), m_Height(p_props->height), m_Flip(p_props->flip){
+        
+    } 
 
     virtual void draw() = 0;
     virtual void update(float p_dt) = 0;

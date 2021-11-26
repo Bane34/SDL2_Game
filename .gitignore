@@ -7,3 +7,5 @@ include/
 .vscode/
 
 program
+
+imgui.ini
