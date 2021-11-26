@@ -2,9 +2,10 @@
 !.cpp
 !src/
 
-lib/
 include/
 
 .vscode/
 
 program
+
+imgui.ini
