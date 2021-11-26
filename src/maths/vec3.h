@@ -34,6 +34,7 @@ struct Vec3{
     static Vec3 getNormal(const float& p_x, const float& p_y, const float& p_z);
 };
 
-typedef Vec3 v3;
+/// Alias for Vec3 (3 dimensional vectors)
+using v3 = Vec3;
 
 #endif /* VEC3_H */

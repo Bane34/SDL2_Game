@@ -33,6 +33,7 @@ struct Vec4{
     static Vec4 getNormal(const float& p_x, const float& p_y);
 };
 
-typedef Vec4 v4;
+/// Alias for Vec4 (4 dimensional vectors)
+using v4 = Vec4;
 
 #endif /* VEC4_H */

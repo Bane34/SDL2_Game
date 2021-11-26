@@ -33,6 +33,7 @@ struct Vec2{
     static Vec2 getNormal(const float& p_x, const float& p_y);
 };
 
-typedef Vec2 v2;
+/// Alias for Vec2 (2 dimensional vectors)
+using v2 = Vec2;
 
 #endif /* VEC2_H */

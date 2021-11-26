@@ -35,6 +35,7 @@ struct Mat4 {
 
 };
 
-typedef Mat4 m4;
+/// Alias for Mat4 (4 * 4 matrices)
+using m4 = Mat4;
 
 #endif /* MAT4_H */

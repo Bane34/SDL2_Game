@@ -1,0 +1,19 @@
+PROJECT_NAME             = "SDL2_Game"
+
+PROJECT_BRIEF            = "Game engine built in c++ with SDL2 and ImGui"
+
+INPUT                    = ./src/ ./src/core ./src/maths ./src/colors
+
+OUTPUT_DIRECTORY         = ./docs
+
+PREDEFINED               = __cplusplus
+
+GENERATE_LATEX           = NO
+
+DISTRIBUTE_GROUP_DOC     = YES
+
+EXTRACT_ALL              = YES
+
+SOURCE_BROWSER           = YES
+
+INLINE_SOURCES           = YES
