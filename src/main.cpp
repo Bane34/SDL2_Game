@@ -5,11 +5,11 @@
 #include "object/gameObject.h"
 
 int main(int, char**){    
-    Window window("Test", 1280, 720, flags::OPENGL | flags::WINDOW_SHOWN);
+    Window window("Test", 1280, 720, Window::OPENGL | Window::WINDOW_SHOWN, true);
 
     window.getVersion();
 
-    ImVec4 clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    Vec4 clearColor = Vec4(0.45f, 0.55f, 0.60f, 1.00f);
     
     while(window.isOpen()){
         window.handleEvents();

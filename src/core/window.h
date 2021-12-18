@@ -12,19 +12,16 @@
 #include "utils/colors.h"
 #include "utils/logger.h"
 #include "textureManager.h"
-
-// Definition of the window flags //
-
-enum flags {
-    FULLSCREEN   = SDL_WINDOW_FULLSCREEN,
-    WINDOW_SHOWN = SDL_WINDOW_SHOWN,
-    OPENGL       = SDL_WINDOW_OPENGL,
-    RESIZABLE    = SDL_WINDOW_RESIZABLE
-};
-
 class Window {
 public:
-    Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flags);
+    enum flags {
+        FULLSCREEN   = SDL_WINDOW_FULLSCREEN,
+        WINDOW_SHOWN = SDL_WINDOW_SHOWN,
+        OPENGL       = SDL_WINDOW_OPENGL,
+        RESIZABLE    = SDL_WINDOW_RESIZABLE
+    };
+
+    Window(const char* p_name, uint32_t p_width, uint32_t p_height, int p_flags, bool p_imGuiEnabled);
     ~Window();
 
     void imGuiCreate();
@@ -55,7 +52,7 @@ private:
     unsigned int   m_Width, m_Height;
     int            m_RenderFlags = SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED;
     int            m_WindowFlags;
-    bool           m_Running;
+    bool           m_Running, m_ImGuiEnabled;
 };
 
 #endif /* WINDOW_H */

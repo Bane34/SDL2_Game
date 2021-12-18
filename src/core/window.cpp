@@ -1,6 +1,6 @@
 #include "window.h"
 
-Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flags){
+Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int p_flags, bool p_imGuiEnabled = true){
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
         printf("Could not init SDL! SDL_ERROR: %s\n", SDL_GetError());
         return;
@@ -14,7 +14,7 @@ Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flag
     m_Name   = p_name;
     m_Width  = p_width;
     m_Height = p_height;
-    m_WindowFlags  = flags;
+    m_WindowFlags  = p_flags;
 
     if(!initWindow()){
         printf("Could not create the window! SDL_ERROR: %s\n", SDL_GetError());
@@ -26,9 +26,8 @@ Window::Window(const char* p_name, uint32_t p_width, uint32_t p_height, int flag
         return;
     }
 
-    if(!initImgui()){
-        printf("Could not init imgui!");
-    }
+    if(p_imGuiEnabled)
+        initImgui();
 
     m_Running = true;
     

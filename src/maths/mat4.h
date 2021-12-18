@@ -19,7 +19,7 @@ struct Mat4 {
     Mat4(Vec4 p_diagonal);
     Mat4(Vec4 p_row1, Vec4 p_row2, Vec4 p_row3, Vec4 p_row4);
 
-    static Mat4 identity(); 
+    static Mat4 identity();
     static Mat4 translation(const Vec3& p_translation);
     
     Mat4& multiply(const Mat4& p_other);
